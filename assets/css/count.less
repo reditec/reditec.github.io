@@ -1,0 +1,45 @@
+// FONTS
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+
+// COLORS
+@colGrey: #262626;
+@colAccent: #881313;
+
+// RESETS
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+html, body {
+    height: 100%;
+}
+
+// STYLE
+body {
+    background: url('../img/header_bg.png') center center no-repeat;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+// COUNTDOWN
+.box {
+    width: 500px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margn-top: -150px;
+    margin-left: -250px;
+    text-align: center;
+    
+    & p {
+        margin-top: 20px;
+        color: #fff;
+        font-weight: 300;
+        font-size: 18px;
+    }
+}

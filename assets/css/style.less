@@ -1,0 +1,104 @@
+// FONTS
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+
+// COLORS
+@colGrey: #262626;
+@colAccent: #881313;
+
+// RESETS
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+// STYLE
+body {
+    background: #262626;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+// HEADER
+header {
+    padding: 100px 0px;
+    background: url('../img/header_bg.png') center center no-repeat;
+    background-size: cover;
+    color: #fff;
+    
+    & h1 {
+        font-size: 36px;
+        font-weight: 300;
+    }
+    & p {
+        margin-bottom: 10px;
+    }
+    & button {
+        background: transparent;
+        border: 2px solid #fff;
+        color: #fff;
+        padding: 10px 20px;
+        transition: 0.2s ease all;
+        
+        &:hover {
+            background: #fff;
+            color: #000;
+            cursor: pointer;
+        }
+    }
+}
+section[data-section="help"] {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #f1f1f1;
+    
+    & h1.header {
+        font-size: 30px;
+        font-weight: 300;
+    }
+}
+section[data-section="updates"] {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #fff;
+    
+    & h1.header {
+        font-size: 30px;
+        font-weight: 300;
+    }
+    & .update {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        
+        & h2 {
+            font-size: 20px;
+            font-weight: 500;
+        }
+    }
+    & ul {
+        padding: 0px 20px;
+    }
+    & .actions {
+        margin-top: 10px;
+        & button {
+            background: transparent;
+            border: 2px solid @colAccent;
+            color: @colAccent;
+            padding: 5px 20px;
+            transition: 0.2s ease all;
+
+            &:hover {
+                background: @colAccent;
+                color: #fff;
+                cursor: pointer;
+            }
+        }
+    }
+}
+footer {
+    font-size: 24px;
+    color: #fff;
+    padding: 40px 0px;
+}
