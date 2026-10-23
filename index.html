@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SparkIV · GTA IV file browser, viewer and editor</title>
+  <meta name="description" content="SparkIV is a free, open source file browser, viewer and editor for Grand Theft Auto IV and Episodes from Liberty City (PC), with a cutscene viewer that renders like the game." />
+  <link rel="icon" href="assets/img/sparkiv-icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F5F7FA;
+      --surface: #FFFFFF;
+      --text: #14202E;
+      --muted: #566577;
+      --line: #DCE3EA;
+      --accent: #1F78D1;
+      --accent-2: #2EC5C0;
+      --spark: #FFC23D;
+      --hero-text: #FFFFFF;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0E141C;
+        --surface: #16202B;
+        --text: #E8EEF4;
+        --muted: #9AA9B8;
+        --line: #26333F;
+        --accent: #5AA8F0;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.6 "Inter", "Segoe UI", system-ui, sans-serif;
+    }
+    a { color: var(--accent); }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+
+    /* hero */
+    .hero {
+      background: linear-gradient(135deg, var(--accent-2), #1F78D1 70%);
+      color: var(--hero-text);
+      padding: 72px 0 80px;
+    }
+    .hero .wrap { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+    .hero img { width: 160px; height: 160px; border-radius: 36px; box-shadow: 0 18px 40px rgba(0, 0, 0, .25); }
+    .hero h1 { font-size: 48px; line-height: 1.1; margin: 0 0 8px; font-weight: 700; letter-spacing: -.5px; }
+    .hero p { font-size: 19px; margin: 0 0 24px; max-width: 560px; opacity: .95; }
+    .badge {
+      display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: .3px;
+      background: rgba(255, 255, 255, .18); border: 1px solid rgba(255, 255, 255, .35);
+      padding: 2px 10px; border-radius: 999px; margin-bottom: 14px;
+    }
+    .buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 12px 22px; border-radius: 10px; font-weight: 600;
+      text-decoration: none; transition: transform .15s ease, background .15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: #FFFFFF; color: #14507F; }
+    .btn-ghost { border: 2px solid rgba(255, 255, 255, .8); color: #FFFFFF; }
+    .btn-ghost:hover { background: rgba(255, 255, 255, .12); }
+    .hint { font-size: 13px; opacity: .85; margin-top: 12px; }
+
+    /* sections */
+    section { padding: 64px 0; }
+    section + section { border-top: 1px solid var(--line); }
+    h2 { font-size: 30px; margin: 0 0 8px; letter-spacing: -.3px; }
+    .lead { color: var(--muted); margin: 0 0 32px; max-width: 680px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px;
+    }
+    .card h3 { margin: 0 0 6px; font-size: 17px; }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+    .card .ext { font-family: Consolas, "Cascadia Mono", monospace; font-size: 13px; color: var(--accent); }
+
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; counter-reset: step; }
+    .steps .card { position: relative; padding-top: 48px; }
+    .steps .card::before {
+      counter-increment: step; content: counter(step);
+      position: absolute; top: 16px; left: 20px; width: 24px; height: 24px; border-radius: 50%;
+      background: var(--accent); color: #FFFFFF; font-size: 13px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+    ul.plain { padding-left: 20px; margin: 0; }
+    ul.plain li { margin-bottom: 6px; }
+
+    .other {
+      display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
+      background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px;
+    }
+    .other img { height: 26px; background: #262626; padding: 8px 12px; border-radius: 8px; box-sizing: content-box; }
+    .other p { margin: 0; color: var(--muted); flex: 1 1 260px; }
+
+    footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); }
+    footer p { margin: 0 0 6px; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 48px 0 56px; }
+      .hero h1 { font-size: 36px; }
+      .hero img { width: 112px; height: 112px; border-radius: 26px; }
+      section { padding: 48px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <img src="assets/img/sparkiv-icon.svg" alt="SparkIV logo" />
+      <div>
+        <span class="badge">0.9.0 alpha · open source</span>
+        <h1>SparkIV</h1>
+        <p>A free file browser, viewer and editor for Grand Theft Auto IV and Episodes from Liberty City on PC, with a cutscene viewer that renders like the game.</p>
+        <div class="buttons">
+          <a class="btn btn-primary" href="https://github.com/reditec/SparkIV/releases" target="_blank" rel="noopener">Download</a>
+          <a class="btn btn-ghost" href="https://github.com/reditec/SparkIV" target="_blank" rel="noopener">Source on GitHub</a>
+        </div>
+        <div class="hint">Windows 10 or later, x64 · updates itself after installing</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <h2>What it does</h2>
+        <p class="lead">Open the game's archives, look inside every file and change them safely. SparkIV reads the files of your own copy of the game; it contains no game data.</p>
+        <div class="grid">
+          <div class="card"><h3>Archives</h3><p>Browse the IMG and RPF archives of GTA IV, The Lost and Damned and The Ballad of Gay Tony.</p></div>
+          <div class="card"><h3>Cutscenes <span class="ext">.cut</span></h3><p>Plays the cutscenes with cast, camera, lights, sound and location, lit and shaded the way the game does it.</p></div>
+          <div class="card"><h3>Models <span class="ext">.wdr .wdd .wft</span></h3><p>Models in 3D, with their textures and shaders.</p></div>
+          <div class="card"><h3>Textures <span class="ext">.wtd</span></h3><p>View and export the textures of a dictionary.</p></div>
+          <div class="card"><h3>Animations <span class="ext">.wad</span></h3><p>Play the animations of a dictionary.</p></div>
+          <div class="card"><h3>Audio <span class="ext">.ivaud</span></h3><p>Listen to sound banks, including multichannel tracks, and export them.</p></div>
+          <div class="card"><h3>Scripts <span class="ext">.sco</span></h3><p>Decompiled or disassembled mission scripts.</p></div>
+          <div class="card"><h3>Collision <span class="ext">.wbn .wbd</span></h3><p>See the collision of the map.</p></div>
+          <div class="card"><h3>Editing</h3><p>Replace and import files in an edit mode. The original of every file is backed up before SparkIV first writes to it.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Get started</h2>
+        <p class="lead">A legally owned copy of GTA IV or Episodes from Liberty City for PC is required.</p>
+        <div class="steps">
+          <div class="card"><h3>Download</h3><p>Get <span class="ext">reditec.SparkIV-win-Setup.exe</span> from the <a href="https://github.com/reditec/SparkIV/releases" target="_blank" rel="noopener">releases</a>.</p></div>
+          <div class="card"><h3>Install</h3><p>Run it. As the app isn't signed yet, Windows may warn you: choose "More info", then "Run anyway".</p></div>
+          <div class="card"><h3>Open your game</h3><p>SparkIV finds the game folder or asks for it. New versions install with one click; the channel is set in Settings → Updates.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap split">
+        <div>
+          <h2>Where it's heading</h2>
+          <p class="lead">Version 1.0 will be the first that fully supports GTA IV on PC:</p>
+          <ul class="plain">
+            <li>every file of the game opens;</li>
+            <li>all cutscenes look as they do in the game;</li>
+            <li>export, edit and import, compatible with OpenIV's openFormats.</li>
+          </ul>
+          <p>Known differences from the game are tracked in the <a href="https://github.com/reditec/SparkIV/issues" target="_blank" rel="noopener">issues</a>.</p>
+        </div>
+        <div>
+          <h2>Open source</h2>
+          <p class="lead">SparkIV is free software under the GNU General Public License v3.</p>
+          <p>It was started by aru in 2008 and carried on by Ahmed Walid and Silent Spud; reditec has rebuilt it as a WinUI app since 2026. Contributions and bug reports are welcome on <a href="https://github.com/reditec/SparkIV" target="_blank" rel="noopener">GitHub</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Also by reditec</h2>
+        <div class="other">
+          <img src="assets/img/logo_fullwhite_2x.png" alt="RDR Explorer" />
+          <p>RDR Explorer: a free, open source file explorer for Red Dead Redemption.</p>
+          <a class="btn" style="border: 2px solid var(--accent); color: var(--accent);" href="rdr-explorer/">Visit</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>&copy; 2026 reditec</p>
+      <p>SparkIV is an unofficial fan project. It is not affiliated with, endorsed or sponsored by Rockstar Games or Take-Two Interactive. Grand Theft Auto, GTA and related names are trademarks of Take-Two Interactive Software, Inc.</p>
+    </div>
+  </footer>
+</body>
+</html>
