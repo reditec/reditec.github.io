@@ -94,7 +94,6 @@
     .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
     ul.plain { padding-left: 20px; margin: 0; }
     ul.plain li { margin-bottom: 6px; }
-
     .other {
       display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
       background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px;
@@ -118,14 +117,14 @@
     <div class="wrap">
       <img src="assets/img/sparkiv-icon.svg" alt="SparkIV logo" />
       <div>
-        <span class="badge">0.9.0-alpha.2 · open source</span>
+        <span class="badge">0.9.0 Alpha 2 · open source</span>
         <h1>SparkIV</h1>
         <p>A free file browser, viewer and editor for Grand Theft Auto IV and Episodes from Liberty City on PC, with a cutscene viewer that renders like the game.</p>
         <div class="buttons">
           <a class="btn btn-primary" href="https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.2" target="_blank" rel="noopener">Download</a>
           <a class="btn btn-ghost" href="https://github.com/reditec/SparkIV" target="_blank" rel="noopener">Source on GitHub</a>
         </div>
-        <div class="hint">Windows 10 or later, x64 · updates itself after installing · <a href="https://github.com/reditec/SparkIV/blob/master/CHANGELOG.md" target="_blank" rel="noopener">What's new</a></div>
+        <div class="hint">Windows 10 or later, x64 · updates itself after installing · released October 26, 2026 · <a href="#whats-new">What's new</a></div>
       </div>
     </div>
   </header>
@@ -158,6 +157,25 @@
           <div class="card"><h3>Install</h3><p>Run it. As the app isn't signed yet, Windows may warn you: choose "More info", then "Run anyway".</p></div>
           <div class="card"><h3>Open your game</h3><p>SparkIV finds the game folder or asks for it. New versions install with one click and show what's new; the channel is set in Settings → Updates.</p></div>
         </div>
+      </div>
+    </section>
+
+    <section id="whats-new">
+      <div class="wrap">
+        <h2>What's new in 0.9.0 Alpha 2</h2>
+        <p class="lead">Released on October 26, 2026. Mostly cutscenes looking more like the game.</p>
+        <ul class="plain">
+          <li>Vehicle windows are no longer drawn twice (bright streaks on car glass).</li>
+          <li>Lamps of other floors no longer light through the floor.</li>
+          <li>See-through lamp shades no longer glow.</li>
+          <li>Shiny surfaces outdoors no longer mirror too much sky.</li>
+          <li>Ceiling spots' lenses light up whole, as in the game.</li>
+          <li>Lamps show their cones of light in the air, as in the game.</li>
+          <li>Lamp shadows on peds' clothes follow their folds, as in the game.</li>
+          <li>Peds' normal maps work again (folds and marks on clothes, as in the game).</li>
+          <li>Settings → About shows the changelog; after an update SparkIV offers to show what's new.</li>
+        </ul>
+        <p>All versions: <a href="https://github.com/reditec/SparkIV/blob/master/CHANGELOG.md" target="_blank" rel="noopener">changelog</a> · <a href="https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.2" target="_blank" rel="noopener">release on GitHub</a></p>
       </div>
     </section>
 
