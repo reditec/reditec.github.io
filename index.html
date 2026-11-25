@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SparkIV · GTA IV file browser, viewer and editor</title>
-  <meta name="description" content="SparkIV is a free, open source file browser, viewer and editor for Grand Theft Auto IV and Episodes from Liberty City (PC), with a cutscene viewer that renders like the game." />
+  <meta name="description" content="SparkIV is a free, open source file browser, viewer and editor for Grand Theft Auto IV and Episodes from Liberty City (PC), with a cutscene viewer that renders like the game, and experimental, read-only support for Red Dead Redemption 2 (PC) and Grand Theft Auto VI (Xbox Series)." />
   <link rel="icon" href="assets/img/sparkiv-icon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -117,14 +117,14 @@
     <div class="wrap">
       <img src="assets/img/sparkiv-icon.svg" alt="SparkIV logo" />
       <div>
-        <span class="badge">0.9.0 Alpha 6 · open source</span>
+        <span class="badge">0.9.0 Alpha 7 · open source</span>
         <h1>SparkIV</h1>
-        <p>A free file browser, viewer and editor for Grand Theft Auto IV and Episodes from Liberty City on PC, with a cutscene viewer that renders like the game.</p>
+        <p>A free file browser, viewer and editor for Grand Theft Auto IV and Episodes from Liberty City on PC, with a cutscene viewer that renders like the game. New: experimental, read-only support for Red Dead Redemption 2 (PC) and Grand Theft Auto VI (Xbox Series).</p>
         <div class="buttons">
-          <a class="btn btn-primary" href="https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.6" target="_blank" rel="noopener">Download</a>
+          <a class="btn btn-primary" href="https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.7" target="_blank" rel="noopener">Download</a>
           <a class="btn btn-ghost" href="https://github.com/reditec/SparkIV" target="_blank" rel="noopener">Source on GitHub</a>
         </div>
-        <div class="hint">Windows 10 or later, x64 · updates itself after installing · released November 6, 2026 · <a href="#whats-new">What's new</a></div>
+        <div class="hint">Windows 10 or later, x64 · updates itself after installing · released November 25, 2026 · <a href="#whats-new">What's new</a></div>
       </div>
     </div>
   </header>
@@ -133,17 +133,19 @@
     <section>
       <div class="wrap">
         <h2>What it does</h2>
-        <p class="lead">Open the game's archives, look inside every file and change them safely. SparkIV reads the files of your own copy of the game; it contains no game data.</p>
+        <p class="lead">Open the game's archives, look inside every file and change them safely. SparkIV reads the files of your own copy of the game; it contains no game data and no keys.</p>
         <div class="grid">
           <div class="card"><h3>Archives</h3><p>Browse the IMG and RPF archives of GTA IV, The Lost and Damned and The Ballad of Gay Tony.</p></div>
+          <div class="card"><h3>Red Dead Redemption 2 <span class="ext">.rpf</span></h3><p>Experimental, read-only: browse the game's RPF8 archives with their file names. A one-time assistant reads the keys from the running game.</p></div>
+          <div class="card"><h3>Grand Theft Auto VI <span class="ext">.rpf .ttpf</span></h3><p>Experimental, read-only: browse the archives of the Xbox Series version and its texture pools; textures and audio open in the same viewers as GTA IV's. The cipher is read from the game's own executable.</p></div>
           <div class="card"><h3>Cutscenes <span class="ext">.cut</span></h3><p>Plays the cutscenes with cast, camera, lights, sound and location, lit and shaded the way the game does it.</p></div>
           <div class="card"><h3>Models <span class="ext">.wdr .wdd .wft</span></h3><p>Models in 3D, with their textures and shaders.</p></div>
-          <div class="card"><h3>Textures <span class="ext">.wtd</span></h3><p>View and export the textures of a dictionary.</p></div>
+          <div class="card"><h3>Textures <span class="ext">.wtd .ztd .dds</span></h3><p>View and export the textures of a dictionary, GTA VI's texture pools and DDS files.</p></div>
           <div class="card"><h3>Animations <span class="ext">.wad</span></h3><p>Play the animations of a dictionary.</p></div>
-          <div class="card"><h3>Audio <span class="ext">.ivaud</span></h3><p>Listen to sound banks, including multichannel tracks, and export them.</p></div>
+          <div class="card"><h3>Audio <span class="ext">.ivaud .awc</span></h3><p>Listen to sound banks, including multichannel tracks and GTA VI's radio stations, and export them.</p></div>
           <div class="card"><h3>Scripts <span class="ext">.sco</span></h3><p>Decompiled or disassembled mission scripts.</p></div>
           <div class="card"><h3>Collision <span class="ext">.wbn .wbd</span></h3><p>See the collision of the map.</p></div>
-          <div class="card"><h3>Editing</h3><p>Replace and import files in an edit mode. The original of every file is backed up before SparkIV first writes to it.</p></div>
+          <div class="card"><h3>Editing</h3><p>Replace and import files of GTA IV and the episodes in an edit mode. The original of every file is backed up before SparkIV first writes to it.</p></div>
         </div>
       </div>
     </section>
@@ -151,7 +153,7 @@
     <section>
       <div class="wrap">
         <h2>Get started</h2>
-        <p class="lead">A legally owned copy of GTA IV or Episodes from Liberty City for PC is required.</p>
+        <p class="lead">A legally owned copy of a supported game is required: GTA IV or Episodes from Liberty City (PC), Red Dead Redemption 2 (PC) or Grand Theft Auto VI (Xbox Series). SparkIV may only be used for offline modding.</p>
         <div class="steps">
           <div class="card"><h3>Download</h3><p>Get <span class="ext">reditec.SparkIV-win-Setup.exe</span> from the <a href="https://github.com/reditec/SparkIV/releases" target="_blank" rel="noopener">releases</a>.</p></div>
           <div class="card"><h3>Install</h3><p>Run it. As the app isn't signed yet, Windows may warn you: choose "More info", then "Run anyway".</p></div>
@@ -162,17 +164,17 @@
 
     <section id="whats-new">
       <div class="wrap">
-        <h2>What's new in 0.9.0 Alpha 6</h2>
-        <p class="lead">Released on November 6, 2026. Cutscenes, models and animations are now drawn by SparkIV's own Direct3D 12 renderer: smoother, faster and closer to the game.</p>
+        <h2>What's new in 0.9.0 Alpha 7</h2>
+        <p class="lead">Released on November 25, 2026. SparkIV opens Red Dead Redemption 2 and Grand Theft Auto VI (experimental, read-only), and the cutscenes come closer to the game.</p>
         <ul class="plain">
-          <li>Cutscenes, models and animations are drawn by SparkIV's own Direct3D 12 renderer instead of a web page: much smoother playback, also in busy scenes like the intro's harbour, faster loading, and a picture closer to the game.</li>
-          <li>Playback no longer jumps back and forth after pausing and resuming; the picture follows the sound smoothly.</li>
-          <li>A cutscene's .wad file opens in the cutscene view with just its section, with its models, place, sound and subtitles.</li>
-          <li>The night sky has its stars and the galaxy, and the clouds drift with the time of day.</li>
-          <li>The cutscene's own lights and the lamps around light the scene as in the game; glowing signs fade into the haze, and car and ped glass is lit as in the game.</li>
-          <li>New "Open file" button (Ctrl+O) opens a single file from disk.</li>
+          <li>Red Dead Redemption 2 (PC): browse the RPF8 archives with their file names; a one-time assistant reads the keys from the running game.</li>
+          <li>Grand Theft Auto VI (Xbox Series): browse the RPF9 archives, also archives inside archives; encrypted and compressed files open as their real content, and file names are recovered from the game's own strings.</li>
+          <li>GTA VI's textures (.ztd), texture pools (.ttpf) and audio (.awc, also the radio stations) open in the same texture and audio viewers as GTA IV's.</li>
+          <li>One "Choose Game" button opens the game selector; edit mode stays off for RDR2 and GTA VI.</li>
+          <li>Cutscenes: street lamps and traffic lights glow, the map's smoke and steam show, vehicle headlamps, lamp shadows, characters, sky, water and fog are closer to the game.</li>
+          <li>New settings "Texture filtering" and "Smooth edges" for the 3D views.</li>
         </ul>
-        <p>All versions: <a href="https://github.com/reditec/SparkIV/blob/master/CHANGELOG.md" target="_blank" rel="noopener">changelog</a> · <a href="https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.6" target="_blank" rel="noopener">release on GitHub</a></p>
+        <p>All versions: <a href="https://github.com/reditec/SparkIV/blob/master/CHANGELOG.md" target="_blank" rel="noopener">changelog</a> · <a href="https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.7" target="_blank" rel="noopener">release on GitHub</a></p>
       </div>
     </section>
 
@@ -191,7 +193,7 @@
         <div>
           <h2>Open source</h2>
           <p class="lead">SparkIV is free software under the GNU General Public License v3.</p>
-          <p>It was started by aru in 2008 and carried on by Ahmed Walid and Silent Spud; reditec has rebuilt it as a WinUI app since 2026. Contributions and bug reports are welcome on <a href="https://github.com/reditec/SparkIV" target="_blank" rel="noopener">GitHub</a>.</p>
+          <p>It was started by aru in 2008 and carried on by Ahmed Walid and Silent Spud; reditec has rebuilt it as a WinUI app since 2026 and added support for RDR2 and GTA VI, with help from PB07 on GTA VI's file names and decryption. Contributions and bug reports are welcome on <a href="https://github.com/reditec/SparkIV" target="_blank" rel="noopener">GitHub</a>.</p>
         </div>
       </div>
     </section>
@@ -211,7 +213,8 @@
   <footer>
     <div class="wrap">
       <p>&copy; 2026 reditec</p>
-      <p>SparkIV is an unofficial fan project. It is not affiliated with, endorsed or sponsored by Rockstar Games or Take-Two Interactive. Grand Theft Auto, GTA and related names are trademarks of Take-Two Interactive Software, Inc.</p>
+      <p>SparkIV may only be used for offline modding. We expressly distance ourselves from any use of it for online modding.</p>
+      <p>SparkIV is an unofficial fan project. It is not affiliated with, endorsed or sponsored by Rockstar Games or Take-Two Interactive. Grand Theft Auto, GTA, Red Dead Redemption and related names are trademarks of Take-Two Interactive Software, Inc.</p>
     </div>
   </footer>
 </body>
