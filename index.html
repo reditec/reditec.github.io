@@ -41,9 +41,9 @@
     "applicationCategory": "UtilitiesApplication",
     "applicationSubCategory": "Game modding tool",
     "operatingSystem": "Windows 10, Windows 11 (x64)",
-    "softwareVersion": "0.9.0-alpha.7",
+    "softwareVersion": "0.9.0-alpha.8",
     "datePublished": "2026-11-25",
-    "downloadUrl": "https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.7",
+    "downloadUrl": "https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.8",
     "releaseNotes": "https://github.com/reditec/SparkIV/blob/master/CHANGELOG.md",
     "license": "https://www.gnu.org/licenses/gpl-3.0.html",
     "isAccessibleForFree": true,
@@ -53,7 +53,7 @@
     "featureList": [
       "GTA IV and Episodes from Liberty City: IMG and RPF archives, textures, models, cutscenes, animations, audio, scripts, collision, edit mode",
       "Red Dead Redemption 2 (PC): RPF8 archives with file names (experimental, read-only)",
-      "Grand Theft Auto VI (Xbox Series): RPF9 archives, textures, texture pools and audio (experimental, read-only)"
+      "Grand Theft Auto VI (Xbox Series): RPF9 archives, textures, texture pools, audio and shader databases (experimental, read-only)"
     ],
     "keywords": "GTA IV, GTA 4, Episodes from Liberty City, Red Dead Redemption 2, RDR2, GTA VI, GTA 6, RPF, IMG, WTD, file viewer, modding tool, RAGE"
   }
@@ -232,7 +232,7 @@
     <div class="wrap">
       <img src="assets/img/sparkiv-icon.svg" alt="SparkIV logo" />
       <div class="text">
-        <span class="badge">0.9.0 Alpha 7 · free and open source</span>
+        <span class="badge">0.9.0 Alpha 8 · free and open source</span>
         <h1>SparkIV<span class="h1-sub">File viewer and editor for GTA IV, RDR2 and GTA VI</span></h1>
         <p>Look inside the game files of Rockstar's RAGE games. Browse their archives, view textures, models, cutscenes and audio, and mod Grand Theft Auto IV safely.</p>
         <ul class="games-line" aria-label="Supported games">
@@ -241,7 +241,7 @@
           <li>GTA VI <span>· Xbox Series · experimental</span></li>
         </ul>
         <div class="buttons">
-          <a class="btn btn-primary" href="https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.7" target="_blank" rel="noopener">Download</a>
+          <a class="btn btn-primary" href="https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.8" target="_blank" rel="noopener">Download</a>
           <a class="btn btn-ghost" href="https://github.com/reditec/SparkIV" target="_blank" rel="noopener">Source on GitHub</a>
         </div>
         <div class="hint">Windows 10 or later, x64 · updates itself after installing · released November 25, 2026 · <a href="#whats-new">What's new</a></div>
@@ -291,6 +291,7 @@
               <li class="yes">RPF9 archives, also archives inside archives; encrypted and compressed files open as their real content</li>
               <li class="yes">File names recovered from the game's own strings (most files)</li>
               <li class="yes">Textures (<span class="ext">.ztd</span>), texture pools (<span class="ext">.ttpf</span>) and audio (<span class="ext">.awc</span>, also the radio stations)</li>
+              <li class="yes">Shader databases: every shader and effect, shaders export as DXIL</li>
               <li class="no">Models: not yet</li>
               <li class="no">Editing: not yet</li>
             </ul>
@@ -319,6 +320,7 @@
               <tr><td class="f">File names</td><td class="y">&#10003;</td><td class="y">&#10003; names database</td><td class="p">most, recovered</td></tr>
               <tr><td class="f">Textures<span class="ext">.wtd .ztd .ttpf .dds</span></td><td class="y">&#10003; view, export, replace</td><td class="n">&ndash;</td><td class="y">&#10003; view, export</td></tr>
               <tr><td class="f">Audio<span class="ext">.ivaud .awc</span></td><td class="y">&#10003; play, export</td><td class="n">&ndash;</td><td class="y">&#10003; play, export</td></tr>
+              <tr><td class="f">Shader databases<span class="ext">.sgd5</span></td><td class="n">&ndash;</td><td class="n">&ndash;</td><td class="y">&#10003; list, export as DXIL</td></tr>
               <tr><td class="f">Models in 3D<span class="ext">.wdr .wdd .wft</span></td><td class="y">&#10003;</td><td class="n">&ndash;</td><td class="n">&ndash;</td></tr>
               <tr><td class="f">Cutscenes<span class="ext">.cut</span></td><td class="y">&#10003; rendered like the game</td><td class="n">&ndash;</td><td class="n">&ndash;</td></tr>
               <tr><td class="f">Animations<span class="ext">.wad</span></td><td class="y">&#10003;</td><td class="n">&ndash;</td><td class="n">&ndash;</td></tr>
@@ -348,8 +350,14 @@
 
     <section id="whats-new">
       <div class="wrap">
-        <h2>What's new in 0.9.0 Alpha 7</h2>
-        <p class="lead">Released on November 25, 2026. SparkIV opens Red Dead Redemption 2 and Grand Theft Auto VI, and the cutscenes come closer to the game.</p>
+        <h2>What's new in 0.9.0 Alpha 8</h2>
+        <p class="lead">Released on November 25, 2026. GTA VI's shader databases open in a new viewer, and large files open in the hex view.</p>
+        <ul class="plain">
+          <li>GTA VI: the shader databases in <span class="ext">shaders.rpf</span> list every shader (stage, shader model, size, hash) and every effect with its techniques and passes; shaders export as <span class="ext">.dxbc</span> files with DXIL, one or all at once.</li>
+          <li>The hex view opens files of hundreds of MB right away.</li>
+          <li>GTA VI: large compressed files, such as the shader pack, unpack completely.</li>
+        </ul>
+        <h3 style="margin: 28px 0 8px; font-size: 18px;">Alpha 7</h3>
         <ul class="plain">
           <li>Red Dead Redemption 2 (PC), experimental and read-only: the RPF8 archives with their file names; a one-time assistant reads the keys from the running game.</li>
           <li>Grand Theft Auto VI (Xbox Series), experimental and read-only: the RPF9 archives, also archives inside archives; encrypted and compressed files open as their real content.</li>
@@ -358,7 +366,7 @@
           <li>Cutscenes: street lamps and traffic lights glow, the map's smoke and steam show; headlamps, lamp shadows, characters, sky, water and fog are closer to the game.</li>
           <li>New settings "Texture filtering" and "Smooth edges" for the 3D views.</li>
         </ul>
-        <p>All versions: <a href="https://github.com/reditec/SparkIV/blob/master/CHANGELOG.md" target="_blank" rel="noopener">changelog</a> · <a href="https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.7" target="_blank" rel="noopener">release on GitHub</a></p>
+        <p>All versions: <a href="https://github.com/reditec/SparkIV/blob/master/CHANGELOG.md" target="_blank" rel="noopener">changelog</a> · <a href="https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.8" target="_blank" rel="noopener">release on GitHub</a></p>
       </div>
     </section>
 
