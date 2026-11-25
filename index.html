@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SparkIV · GTA IV file browser, viewer and editor</title>
-  <meta name="description" content="SparkIV is a free, open source file browser, viewer and editor for Grand Theft Auto IV and Episodes from Liberty City (PC), with a cutscene viewer that renders like the game, and experimental, read-only support for Red Dead Redemption 2 (PC) and Grand Theft Auto VI (Xbox Series)." />
+  <title>SparkIV · File browser and viewer for GTA IV, RDR2 and GTA VI</title>
+  <meta name="description" content="SparkIV is a free, open source file browser, viewer and editor for Grand Theft Auto IV and Episodes from Liberty City (PC), with experimental, read-only support for Red Dead Redemption 2 (PC) and Grand Theft Auto VI (Xbox Series)." />
   <link rel="icon" href="assets/img/sparkiv-icon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,6 +20,13 @@
       --accent-2: #2EC5C0;
       --spark: #FFC23D;
       --hero-text: #FFFFFF;
+      --ok: #1E8E5A;
+      --ok-bg: #E3F5EC;
+      --part: #9A6400;
+      --part-bg: #FFF2D6;
+      --no: #8A97A6;
+      --exp: #7A4FD0;
+      --exp-bg: #EEE7FC;
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -29,6 +36,13 @@
         --muted: #9AA9B8;
         --line: #26333F;
         --accent: #5AA8F0;
+        --ok: #5FD39A;
+        --ok-bg: #143326;
+        --part: #F2C063;
+        --part-bg: #3A2D12;
+        --no: #66768A;
+        --exp: #B79BF5;
+        --exp-bg: #2A2142;
       }
     }
     * { box-sizing: border-box; }
@@ -50,8 +64,15 @@
     }
     .hero .wrap { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
     .hero img { width: 160px; height: 160px; border-radius: 36px; box-shadow: 0 18px 40px rgba(0, 0, 0, .25); }
-    .hero h1 { font-size: 48px; line-height: 1.1; margin: 0 0 8px; font-weight: 700; letter-spacing: -.5px; }
-    .hero p { font-size: 19px; margin: 0 0 24px; max-width: 560px; opacity: .95; }
+    .hero .text { flex: 1 1 420px; }
+    .hero h1 { font-size: 48px; line-height: 1.1; margin: 0 0 12px; font-weight: 700; letter-spacing: -.5px; }
+    .hero p { font-size: 19px; margin: 0 0 20px; max-width: 600px; opacity: .95; }
+    .games-line { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px; padding: 0; list-style: none; }
+    .games-line li {
+      font-size: 14px; font-weight: 600; padding: 4px 12px; border-radius: 999px;
+      background: rgba(255, 255, 255, .16); border: 1px solid rgba(255, 255, 255, .35);
+    }
+    .games-line li span { font-weight: 400; opacity: .85; }
     .badge {
       display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: .3px;
       background: rgba(255, 255, 255, .18); border: 1px solid rgba(255, 255, 255, .35);
@@ -69,18 +90,59 @@
     .hint { font-size: 13px; opacity: .85; margin-top: 12px; }
     .hint a { color: inherit; }
 
+    /* notice */
+    .notice { background: var(--surface); border-bottom: 1px solid var(--line); }
+    .notice .wrap { display: flex; gap: 14px; align-items: flex-start; padding-top: 18px; padding-bottom: 18px; }
+    .notice .icon {
+      flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--spark); color: #14202E;
+      font-weight: 700; display: flex; align-items: center; justify-content: center;
+    }
+    .notice p { margin: 0; font-size: 15px; color: var(--muted); }
+    .notice strong { color: var(--text); }
+
     /* sections */
     section { padding: 64px 0; }
     section + section { border-top: 1px solid var(--line); }
     h2 { font-size: 30px; margin: 0 0 8px; letter-spacing: -.3px; }
-    .lead { color: var(--muted); margin: 0 0 32px; max-width: 680px; }
+    .lead { color: var(--muted); margin: 0 0 32px; max-width: 700px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
     .card {
       background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px;
     }
     .card h3 { margin: 0 0 6px; font-size: 17px; }
     .card p { margin: 0; color: var(--muted); font-size: 15px; }
-    .card .ext { font-family: Consolas, "Cascadia Mono", monospace; font-size: 13px; color: var(--accent); }
+    .ext { font-family: Consolas, "Cascadia Mono", monospace; font-size: 13px; color: var(--accent); }
+
+    /* games */
+    .games { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+    .game { display: flex; flex-direction: column; gap: 12px; }
+    .game h3 { font-size: 20px; margin: 0; line-height: 1.25; }
+    .game .meta { display: flex; flex-wrap: wrap; gap: 6px; }
+    .pill { font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 999px; white-space: nowrap; }
+    .pill-platform { background: var(--bg); border: 1px solid var(--line); color: var(--muted); }
+    .pill-full { background: var(--ok-bg); color: var(--ok); }
+    .pill-exp { background: var(--exp-bg); color: var(--exp); }
+    .game ul { list-style: none; margin: 0; padding: 0; font-size: 15px; }
+    .game li { padding: 4px 0 4px 26px; position: relative; color: var(--text); }
+    .game li::before { position: absolute; left: 0; top: 4px; font-weight: 700; }
+    .game li.yes::before { content: "\2713"; color: var(--ok); }
+    .game li.no { color: var(--muted); }
+    .game li.no::before { content: "\2013"; color: var(--no); }
+    .game .note { font-size: 14px; color: var(--muted); margin-top: auto; padding-top: 8px; border-top: 1px solid var(--line); }
+
+    /* feature table */
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+    table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 15px; }
+    th, td { padding: 11px 16px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    thead th { font-size: 14px; color: var(--muted); font-weight: 600; background: var(--bg); }
+    thead th small { display: block; font-weight: 400; font-size: 12px; }
+    td.f { font-weight: 600; }
+    td.f .ext { font-weight: 400; display: block; }
+    .y { color: var(--ok); font-weight: 600; }
+    .p { color: var(--part); font-weight: 600; }
+    .n { color: var(--no); }
+    .legend { font-size: 13px; color: var(--muted); margin-top: 10px; }
 
     .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; counter-reset: step; }
     .steps .card { position: relative; padding-top: 48px; }
@@ -107,8 +169,10 @@
     @media (max-width: 600px) {
       .hero { padding: 48px 0 56px; }
       .hero h1 { font-size: 36px; }
+      .hero p { font-size: 17px; }
       .hero img { width: 112px; height: 112px; border-radius: 26px; }
       section { padding: 48px 0; }
+      h2 { font-size: 26px; }
     }
   </style>
 </head>
@@ -116,10 +180,15 @@
   <header class="hero">
     <div class="wrap">
       <img src="assets/img/sparkiv-icon.svg" alt="SparkIV logo" />
-      <div>
-        <span class="badge">0.9.0 Alpha 7 · open source</span>
+      <div class="text">
+        <span class="badge">0.9.0 Alpha 7 · free and open source</span>
         <h1>SparkIV</h1>
-        <p>A free file browser, viewer and editor for Grand Theft Auto IV and Episodes from Liberty City on PC, with a cutscene viewer that renders like the game. New: experimental, read-only support for Red Dead Redemption 2 (PC) and Grand Theft Auto VI (Xbox Series).</p>
+        <p>Look inside the game files of Rockstar's RAGE games. Browse their archives, view textures, models, cutscenes and audio, and mod Grand Theft Auto IV safely.</p>
+        <ul class="games-line" aria-label="Supported games">
+          <li>GTA IV &amp; Episodes <span>· PC</span></li>
+          <li>Red Dead Redemption 2 <span>· PC · experimental</span></li>
+          <li>GTA VI <span>· Xbox Series · experimental</span></li>
+        </ul>
         <div class="buttons">
           <a class="btn btn-primary" href="https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.7" target="_blank" rel="noopener">Download</a>
           <a class="btn btn-ghost" href="https://github.com/reditec/SparkIV" target="_blank" rel="noopener">Source on GitHub</a>
@@ -129,35 +198,99 @@
     </div>
   </header>
 
+  <div class="notice" role="note">
+    <div class="wrap">
+      <div class="icon" aria-hidden="true">!</div>
+      <p><strong>For offline modding only, with your own copy of the game.</strong> SparkIV contains no game data and no keys: it reads them from the game files on your PC. We expressly distance ourselves from any use of SparkIV for online modding or cheating.</p>
+    </div>
+  </div>
+
   <main>
-    <section>
+    <section id="games">
       <div class="wrap">
-        <h2>What it does</h2>
-        <p class="lead">Open the game's archives, look inside every file and change them safely. SparkIV reads the files of your own copy of the game; it contains no game data and no keys.</p>
-        <div class="grid">
-          <div class="card"><h3>Archives</h3><p>Browse the IMG and RPF archives of GTA IV, The Lost and Damned and The Ballad of Gay Tony.</p></div>
-          <div class="card"><h3>Red Dead Redemption 2 <span class="ext">.rpf</span></h3><p>Experimental, read-only: browse the game's RPF8 archives with their file names. A one-time assistant reads the keys from the running game.</p></div>
-          <div class="card"><h3>Grand Theft Auto VI <span class="ext">.rpf .ttpf</span></h3><p>Experimental, read-only: browse the archives of the Xbox Series version and its texture pools; textures and audio open in the same viewers as GTA IV's. The cipher is read from the game's own executable.</p></div>
-          <div class="card"><h3>Cutscenes <span class="ext">.cut</span></h3><p>Plays the cutscenes with cast, camera, lights, sound and location, lit and shaded the way the game does it.</p></div>
-          <div class="card"><h3>Models <span class="ext">.wdr .wdd .wft</span></h3><p>Models in 3D, with their textures and shaders.</p></div>
-          <div class="card"><h3>Textures <span class="ext">.wtd .ztd .dds</span></h3><p>View and export the textures of a dictionary, GTA VI's texture pools and DDS files.</p></div>
-          <div class="card"><h3>Animations <span class="ext">.wad</span></h3><p>Play the animations of a dictionary.</p></div>
-          <div class="card"><h3>Audio <span class="ext">.ivaud .awc</span></h3><p>Listen to sound banks, including multichannel tracks and GTA VI's radio stations, and export them.</p></div>
-          <div class="card"><h3>Scripts <span class="ext">.sco</span></h3><p>Decompiled or disassembled mission scripts.</p></div>
-          <div class="card"><h3>Collision <span class="ext">.wbn .wbd</span></h3><p>See the collision of the map.</p></div>
-          <div class="card"><h3>Editing</h3><p>Replace and import files of GTA IV and the episodes in an edit mode. The original of every file is backed up before SparkIV first writes to it.</p></div>
+        <h2>Supported games</h2>
+        <p class="lead">GTA IV is supported fully, including editing. Red Dead Redemption 2 and GTA VI are new and experimental: their files can be browsed and many of them viewed, but not changed yet.</p>
+        <div class="games">
+          <div class="card game">
+            <h3>Grand Theft Auto IV<br />and Episodes from Liberty City</h3>
+            <div class="meta"><span class="pill pill-platform">PC</span><span class="pill pill-full">Full support</span></div>
+            <ul>
+              <li class="yes">IMG and RPF archives of GTA IV, The Lost and Damned and The Ballad of Gay Tony, with file names</li>
+              <li class="yes">Cutscenes that render like the game: cast, camera, lights, sound, subtitles</li>
+              <li class="yes">Models, textures, animations, audio, scripts, collision, web pages</li>
+              <li class="yes">Edit mode: replace and import files, with backups</li>
+            </ul>
+            <p class="note">The archives' key is read from your game's executable.</p>
+          </div>
+          <div class="card game">
+            <h3>Red Dead Redemption 2</h3>
+            <div class="meta"><span class="pill pill-platform">PC</span><span class="pill pill-exp">Experimental · read-only</span></div>
+            <ul>
+              <li class="yes">RPF8 archives, with the file names of the RAGE-StringsDatabase</li>
+              <li class="yes">Metadata as XML, every file in the hex view, export of any file</li>
+              <li class="no">Textures, models and audio: not yet</li>
+              <li class="no">Editing: not yet</li>
+            </ul>
+            <p class="note">A one-time setup assistant reads the archives' keys from the running game.</p>
+          </div>
+          <div class="card game">
+            <h3>Grand Theft Auto VI</h3>
+            <div class="meta"><span class="pill pill-platform">Xbox Series</span><span class="pill pill-exp">Experimental · read-only</span></div>
+            <ul>
+              <li class="yes">RPF9 archives, also archives inside archives; encrypted and compressed files open as their real content</li>
+              <li class="yes">File names recovered from the game's own strings (most files)</li>
+              <li class="yes">Textures (<span class="ext">.ztd</span>), texture pools (<span class="ext">.ttpf</span>) and audio (<span class="ext">.awc</span>, also the radio stations)</li>
+              <li class="no">Models: not yet</li>
+              <li class="no">Editing: not yet</li>
+            </ul>
+            <p class="note">The archives' cipher is read from the game's own executable.</p>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="wrap">
+        <h2>Features by game</h2>
+        <p class="lead">One viewer per kind of file, the same for every game.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Feature</th>
+                <th scope="col">GTA IV &amp; Episodes<small>PC</small></th>
+                <th scope="col">Red Dead Redemption 2<small>PC · experimental</small></th>
+                <th scope="col">GTA VI<small>Xbox Series · experimental</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="f">Browse archives</td><td class="y">&#10003; IMG, RPF</td><td class="y">&#10003; RPF8</td><td class="y">&#10003; RPF9, nested</td></tr>
+              <tr><td class="f">File names</td><td class="y">&#10003;</td><td class="y">&#10003; names database</td><td class="p">most, recovered</td></tr>
+              <tr><td class="f">Textures<span class="ext">.wtd .ztd .ttpf .dds</span></td><td class="y">&#10003; view, export, replace</td><td class="n">&ndash;</td><td class="y">&#10003; view, export</td></tr>
+              <tr><td class="f">Audio<span class="ext">.ivaud .awc</span></td><td class="y">&#10003; play, export</td><td class="n">&ndash;</td><td class="y">&#10003; play, export</td></tr>
+              <tr><td class="f">Models in 3D<span class="ext">.wdr .wdd .wft</span></td><td class="y">&#10003;</td><td class="n">&ndash;</td><td class="n">&ndash;</td></tr>
+              <tr><td class="f">Cutscenes<span class="ext">.cut</span></td><td class="y">&#10003; rendered like the game</td><td class="n">&ndash;</td><td class="n">&ndash;</td></tr>
+              <tr><td class="f">Animations<span class="ext">.wad</span></td><td class="y">&#10003;</td><td class="n">&ndash;</td><td class="n">&ndash;</td></tr>
+              <tr><td class="f">Scripts<span class="ext">.sco</span></td><td class="y">&#10003; decompiled</td><td class="n">&ndash;</td><td class="n">&ndash;</td></tr>
+              <tr><td class="f">Collision<span class="ext">.wbn .wbd</span></td><td class="y">&#10003;</td><td class="n">&ndash;</td><td class="n">&ndash;</td></tr>
+              <tr><td class="f">Text, data and XML</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+              <tr><td class="f">Hex view, export of any file</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+              <tr><td class="f">Edit mode</td><td class="y">&#10003; with backups</td><td class="n">&ndash;</td><td class="n">&ndash;</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="legend">&#10003; supported · &ndash; not yet · experimental: may change or fail with some files.</p>
       </div>
     </section>
 
     <section>
       <div class="wrap">
         <h2>Get started</h2>
-        <p class="lead">A legally owned copy of a supported game is required: GTA IV or Episodes from Liberty City (PC), Red Dead Redemption 2 (PC) or Grand Theft Auto VI (Xbox Series). SparkIV may only be used for offline modding.</p>
+        <p class="lead">You need a legally owned copy of at least one of the supported games.</p>
         <div class="steps">
           <div class="card"><h3>Download</h3><p>Get <span class="ext">reditec.SparkIV-win-Setup.exe</span> from the <a href="https://github.com/reditec/SparkIV/releases" target="_blank" rel="noopener">releases</a>.</p></div>
           <div class="card"><h3>Install</h3><p>Run it. As the app isn't signed yet, Windows may warn you: choose "More info", then "Run anyway".</p></div>
-          <div class="card"><h3>Open your game</h3><p>SparkIV finds the game folder or asks for it. New versions install with one click and show what's new; the channel is set in Settings → Updates.</p></div>
+          <div class="card"><h3>Choose your game</h3><p>Pick the game and show SparkIV its folder once. New versions install with one click and show what's new.</p></div>
         </div>
       </div>
     </section>
@@ -165,13 +298,13 @@
     <section id="whats-new">
       <div class="wrap">
         <h2>What's new in 0.9.0 Alpha 7</h2>
-        <p class="lead">Released on November 25, 2026. SparkIV opens Red Dead Redemption 2 and Grand Theft Auto VI (experimental, read-only), and the cutscenes come closer to the game.</p>
+        <p class="lead">Released on November 25, 2026. SparkIV opens Red Dead Redemption 2 and Grand Theft Auto VI, and the cutscenes come closer to the game.</p>
         <ul class="plain">
-          <li>Red Dead Redemption 2 (PC): browse the RPF8 archives with their file names; a one-time assistant reads the keys from the running game.</li>
-          <li>Grand Theft Auto VI (Xbox Series): browse the RPF9 archives, also archives inside archives; encrypted and compressed files open as their real content, and file names are recovered from the game's own strings.</li>
-          <li>GTA VI's textures (.ztd), texture pools (.ttpf) and audio (.awc, also the radio stations) open in the same texture and audio viewers as GTA IV's.</li>
-          <li>One "Choose Game" button opens the game selector; edit mode stays off for RDR2 and GTA VI.</li>
-          <li>Cutscenes: street lamps and traffic lights glow, the map's smoke and steam show, vehicle headlamps, lamp shadows, characters, sky, water and fog are closer to the game.</li>
+          <li>Red Dead Redemption 2 (PC), experimental and read-only: the RPF8 archives with their file names; a one-time assistant reads the keys from the running game.</li>
+          <li>Grand Theft Auto VI (Xbox Series), experimental and read-only: the RPF9 archives, also archives inside archives; encrypted and compressed files open as their real content.</li>
+          <li>GTA VI's textures, texture pools and audio open in the same viewers as GTA IV's.</li>
+          <li>One "Choose Game" button opens the game selector.</li>
+          <li>Cutscenes: street lamps and traffic lights glow, the map's smoke and steam show; headlamps, lamp shadows, characters, sky, water and fog are closer to the game.</li>
           <li>New settings "Texture filtering" and "Smooth edges" for the 3D views.</li>
         </ul>
         <p>All versions: <a href="https://github.com/reditec/SparkIV/blob/master/CHANGELOG.md" target="_blank" rel="noopener">changelog</a> · <a href="https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.7" target="_blank" rel="noopener">release on GitHub</a></p>
@@ -188,12 +321,12 @@
             <li>all cutscenes look as they do in the game;</li>
             <li>export, edit and import, compatible with OpenIV's openFormats.</li>
           </ul>
-          <p>Known differences from the game are tracked in the <a href="https://github.com/reditec/SparkIV/issues" target="_blank" rel="noopener">issues</a>.</p>
+          <p>Red Dead Redemption 2 and GTA VI will get more viewers step by step. Known differences from the game are tracked in the <a href="https://github.com/reditec/SparkIV/issues" target="_blank" rel="noopener">issues</a>.</p>
         </div>
         <div>
           <h2>Open source</h2>
           <p class="lead">SparkIV is free software under the GNU General Public License v3.</p>
-          <p>It was started by aru in 2008 and carried on by Ahmed Walid and Silent Spud; reditec has rebuilt it as a WinUI app since 2026 and added support for RDR2 and GTA VI, with help from PB07 on GTA VI's file names and decryption. Contributions and bug reports are welcome on <a href="https://github.com/reditec/SparkIV" target="_blank" rel="noopener">GitHub</a>.</p>
+          <p>It was started by aru in 2008 and carried on by Ahmed Walid and Silent Spud. reditec has rebuilt it as a WinUI app since 2026 and added Red Dead Redemption 2 and GTA VI, with help from PB07 on GTA VI's file names and decryption. Contributions and bug reports are welcome on <a href="https://github.com/reditec/SparkIV" target="_blank" rel="noopener">GitHub</a>.</p>
         </div>
       </div>
     </section>
@@ -213,7 +346,7 @@
   <footer>
     <div class="wrap">
       <p>&copy; 2026 reditec</p>
-      <p>SparkIV may only be used for offline modding. We expressly distance ourselves from any use of it for online modding.</p>
+      <p>SparkIV may only be used for offline modding. We expressly distance ourselves from any use of it for online modding. Rockstar Games has stated that Take-Two generally takes no legal action against single-player, non-commercial projects for its PC games (<a href="https://support.rockstargames.com/articles/5NVOAYjcTomO8v6SX2k76k/pc-single-player-mods" target="_blank" rel="noopener">Rockstar Support</a>).</p>
       <p>SparkIV is an unofficial fan project. It is not affiliated with, endorsed or sponsored by Rockstar Games or Take-Two Interactive. Grand Theft Auto, GTA, Red Dead Redemption and related names are trademarks of Take-Two Interactive Software, Inc.</p>
     </div>
   </footer>
