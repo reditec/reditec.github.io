@@ -3,21 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SparkIV · File browser and viewer for GTA IV, RDR2 and GTA VI</title>
-  <meta name="description" content="SparkIV is a free, open source file browser, viewer and editor for Grand Theft Auto IV and Episodes from Liberty City (PC), with experimental, read-only support for Red Dead Redemption 2 (PC) and Grand Theft Auto VI (Xbox Series)." />
+  <title>SparkIV: GTA IV, RDR2 &amp; GTA VI File Viewer and Editor</title>
+  <meta name="description" content="Free, open source file viewer and editor for GTA IV and Episodes from Liberty City: RPF archives, textures, models, cutscenes, audio. RDR2 and GTA VI experimental." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="author" content="reditec" />
   <meta name="theme-color" content="#1F78D1" />
   <link rel="canonical" href="https://reditec.github.io/" />
+  <link rel="sitemap" type="application/xml" href="https://reditec.github.io/sitemap.xml" />
   <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="SparkIV" />
   <meta property="og:url" content="https://reditec.github.io/" />
-  <meta property="og:title" content="SparkIV · File browser and viewer for GTA IV, RDR2 and GTA VI" />
+  <meta property="og:title" content="SparkIV: GTA IV, RDR2 &amp; GTA VI File Viewer and Editor" />
   <meta property="og:description" content="Free, open source file browser, viewer and editor for GTA IV and Episodes from Liberty City (PC), with experimental, read-only support for Red Dead Redemption 2 (PC) and GTA VI (Xbox Series). For offline modding only." />
   <meta property="og:image" content="https://reditec.github.io/assets/img/sparkiv-icon-256.png" />
   <meta property="og:image:width" content="256" />
   <meta property="og:image:height" content="256" />
   <meta property="og:image:alt" content="SparkIV logo" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="SparkIV · File browser and viewer for GTA IV, RDR2 and GTA VI" />
+  <meta name="twitter:title" content="SparkIV: GTA IV, RDR2 &amp; GTA VI File Viewer and Editor" />
   <meta name="twitter:description" content="Free, open source file browser, viewer and editor for GTA IV and Episodes (PC), with experimental support for Red Dead Redemption 2 (PC) and GTA VI (Xbox Series). For offline modding only." />
   <meta name="twitter:image" content="https://reditec.github.io/assets/img/sparkiv-icon-256.png" />
   <link rel="icon" href="assets/img/sparkiv-icon.svg" type="image/svg+xml" />
@@ -25,6 +29,35 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "SparkIV",
+    "alternateName": "SparkIV file viewer",
+    "description": "Free, open source file browser, viewer and editor for Grand Theft Auto IV and Episodes from Liberty City (PC), with experimental, read-only support for Red Dead Redemption 2 (PC) and Grand Theft Auto VI (Xbox Series). For offline modding only.",
+    "url": "https://reditec.github.io/",
+    "image": "https://reditec.github.io/assets/img/sparkiv-icon-256.png",
+    "applicationCategory": "UtilitiesApplication",
+    "applicationSubCategory": "Game modding tool",
+    "operatingSystem": "Windows 10, Windows 11 (x64)",
+    "softwareVersion": "0.9.0-alpha.7",
+    "datePublished": "2026-11-25",
+    "downloadUrl": "https://github.com/reditec/SparkIV/releases/tag/v0.9.0-alpha.7",
+    "releaseNotes": "https://github.com/reditec/SparkIV/blob/master/CHANGELOG.md",
+    "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "reditec", "url": "https://github.com/reditec" },
+    "codeRepository": "https://github.com/reditec/SparkIV",
+    "featureList": [
+      "GTA IV and Episodes from Liberty City: IMG and RPF archives, textures, models, cutscenes, animations, audio, scripts, collision, edit mode",
+      "Red Dead Redemption 2 (PC): RPF8 archives with file names (experimental, read-only)",
+      "Grand Theft Auto VI (Xbox Series): RPF9 archives, textures, texture pools and audio (experimental, read-only)"
+    ],
+    "keywords": "GTA IV, GTA 4, Episodes from Liberty City, Red Dead Redemption 2, RDR2, GTA VI, GTA 6, RPF, IMG, WTD, file viewer, modding tool, RAGE"
+  }
+  </script>
   <style>
     :root {
       --bg: #F5F7FA;
@@ -82,6 +115,7 @@
     .hero img { width: 160px; height: 160px; border-radius: 36px; box-shadow: 0 18px 40px rgba(0, 0, 0, .25); }
     .hero .text { flex: 1 1 420px; }
     .hero h1 { font-size: 48px; line-height: 1.1; margin: 0 0 12px; font-weight: 700; letter-spacing: -.5px; }
+    .hero h1 .h1-sub { display: block; font-size: 22px; font-weight: 600; letter-spacing: 0; margin-top: 8px; opacity: .92; }
     .hero p { font-size: 19px; margin: 0 0 20px; max-width: 600px; opacity: .95; }
     .games-line { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px; padding: 0; list-style: none; }
     .games-line li {
@@ -185,6 +219,7 @@
     @media (max-width: 600px) {
       .hero { padding: 48px 0 56px; }
       .hero h1 { font-size: 36px; }
+      .hero h1 .h1-sub { font-size: 18px; }
       .hero p { font-size: 17px; }
       .hero img { width: 112px; height: 112px; border-radius: 26px; }
       section { padding: 48px 0; }
@@ -198,7 +233,7 @@
       <img src="assets/img/sparkiv-icon.svg" alt="SparkIV logo" />
       <div class="text">
         <span class="badge">0.9.0 Alpha 7 · free and open source</span>
-        <h1>SparkIV</h1>
+        <h1>SparkIV<span class="h1-sub">File viewer and editor for GTA IV, RDR2 and GTA VI</span></h1>
         <p>Look inside the game files of Rockstar's RAGE games. Browse their archives, view textures, models, cutscenes and audio, and mod Grand Theft Auto IV safely.</p>
         <ul class="games-line" aria-label="Supported games">
           <li>GTA IV &amp; Episodes <span>· PC</span></li>
